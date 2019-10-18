@@ -79,7 +79,7 @@
 	            	ele.onmousedown = function(){
    		
 	            		document.form1.score.value = beat;
-	            		console.log("总得分为："+beat); 
+	            		console.log("final score："+beat); 
 	            	}
 	                beat+=1;
 	            }  
