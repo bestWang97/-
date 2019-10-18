@@ -34,30 +34,7 @@
 				document.getElementById("back").style.display="none";
 				
 			}
-			//countdown over
-			function GameOver(){
-				document.getElementById("remtime").style.display="none"
-				document.getElementById("score").style.display="none"
-				document.getElementById("endPhoto").style.cursor = "none";
-				document.getElementById("back2").style.cursor = "none";
-				document.getElementById("restart").style.cursor = "none";
-				document.getElementById("area").style.display = "none";
-				document.getElementById("point").innerText = beat;
-				document.getElementById("content").style.cursor="auto";
-    			clearTimeout(timeId);//clearTime()方法返回setTimeout()的id	
-    			clearTimeout(timeId2);
-    			clearInterval(intervalid);
-				document.getElementById("endPhoto").style.display="block"
-				document.getElementById("content").style.display="none";
 
-				for (var i=0;i<=8;i++) {
-					document.getElementById("m"+i).style.marginTop="100px";
-				}
-				
-				
-				
-			}
-			
 			//Start game
 			function startGame(){
 				document.getElementById("content").style.cursor="none";
@@ -67,7 +44,9 @@
 				time = 60;
             	document.form1.score.value = 0;
             	beat = 0;
+				timeShow();
 				document.getElementById("content").style.display="block";
+				document.getElementById("remtime").style.display="block";				
 				document.getElementById("score").style.display="block"
 				
 				document.getElementById("content").style.background="url(img/bg_canvas.png)";
@@ -75,7 +54,53 @@
 				document.getElementById("message").style.display="none";
 				document.getElementById("leaderboard").style.display="none";
 				document.getElementById("exit").style.display="none";
+				intervalid= setInterval(function(){
+				//random 
+				var  num = Math.floor(Math.random()*9);
+					
+				//Get various distances
+				var l1=document.getElementById('Img').offsetLeft;  
+				//self width and left width
+	            var r1=document.getElementById('Img').offsetLeft+document.getElementById('Img').offsetWidth;  
+	            var t1=document.getElementById('Img').offsetTop;  
+	            //hammer height and top height
+	            var b1=document.getElementById('Img').offsetTop+document.getElementById('Img').offsetHeight;  
+	            var l2=document.getElementById('m'+num).offsetLeft; 
+	            //mole self width and left width
+	            var r2=document.getElementById('m'+num).offsetLeft+document.getElementById('m'+num).offsetWidth;  
+	            var t2=document.getElementById('m'+num).offsetTop;  
+	            //mole height and top  
+	            var b2=document.getElementById('m'+num).offsetTop+document.getElementById('m'+num).offsetHeight;  
+	             //collision
+	            if(r1<l2 || l1>r2 || b1<t2 || t1>b2)  
+	            {  
+	            	var ele = document.getElementById("m"+num);
+	            	//hammer click
+	            	ele.onmousedown = function(){
+   		
+	            		document.form1.score.value = beat;
+	            		console.log("总得分为："+beat); 
+	            	}
+	                beat+=1;
+	            }  
+	            else  
+	            {  
+	            	var ele = document.getElementById("m"+num);
+	            	ele.onmousedown = function(){
+	            		ChangeBg("Img","img/hammer2.png");
+	            		
+	            		 document.getElementById('m'+num).style.background='url(img/mouse1.png)';  
+	            	}
+	               
+	            }
+
+		            
+		        },3000);
+					
 				}
+
+				
+				
 
 		/*Hammer and animal collision*/
 		// Hammer moves with the mouse
@@ -113,16 +138,16 @@
 		    document.getElementById(id).src=url;
 		  }
 		  
-			/*退出游戏功能*/
-			function exit(){
-				var r = confirm("Are you sure to exit？","alert");
-				if(r==true){
-					window.close();
-				}else{
-					alert("Go back to fight!");
-				}
+		//countdown
+		  function timeShow(){
+			    
+			    if(time == 0){
+			        GameOver();
+			        return;
+			    }else{
+			        time = time-1;
+			        document.form1.remtime.value = time;
+			        timeId = setTimeout("timeShow()",2000);
+			    }
 			}
 			
-			
-			
-	
