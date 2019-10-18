@@ -130,18 +130,7 @@
 				top: 196px;
 				
 			}
-			/*end page*/
-			#endPhoto{
-				
-				display: none;
-				position: absolute;
-				top: 10%;
-				left: 10%;
-				height: 550px;
-				width: 750px;
-				background: url(../img/bg_gameover.png);
-			}
-			/*pointarea*/
+
 			#pointarea{
 				color: white;
 				font-size: 40px;
@@ -150,18 +139,7 @@
 				left: 400px;
 				top: 295px;
 			}
-			/*playbutton*/
-			#playbtn{
-				cursor: none;
-				background: none;
-				position: absolute;
-				left: 600px;
-				top: 40px;
-				width: 60px;
-				height: 56px;
-				background-image: url(../img/musicplaying.png)  ;
-				border: hidden;
-			}
+
 			/*end button at left up*/
 			#endbtn{
 				display: none;
